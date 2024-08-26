@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/game")
+@CrossOrigin(origins = "*")
 public class GameController {
     @Autowired
     private GameService gameService;
@@ -17,10 +18,15 @@ public class GameController {
         return gameService.createGame();
     }
 
-    @GetMapping("/{option}")
+    @PutMapping("/play/{option}")
     public GameResult getWinner(@PathVariable Option option) {
         Option computerOption = gameService.generateRandomOption();
 
         return gameService.playRound(option, computerOption);
+    }
+
+    @GetMapping("/options")
+    public Option[] getOptions() {
+        return Option.values();
     }
 }

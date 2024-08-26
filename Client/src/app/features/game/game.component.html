@@ -1,0 +1,17 @@
+<div class="game">
+  <h1>{{game?.playerScore}} - {{game?.computerScore}}</h1>
+  
+  <div class="options">
+    <div class="player-options">
+      <ng-container *ngFor="let option of options">
+        <button (click)="playRound(option)">
+          <img [src]="'images/' + option + '.png'">
+        </button>
+      </ng-container>
+    </div>
+  
+    <div class="computer-option">
+      <img [src]="'images/' + game?.computerOption + '.png'">
+    </div>
+  </div>
+</div>

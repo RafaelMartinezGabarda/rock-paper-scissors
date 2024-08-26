@@ -1,0 +1,30 @@
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.player-options {
+  border-right: 1px solid black;
+  width: 50%;
+}
+
+.player-options>button {
+  height: 100%;
+  vertical-align: bottom;
+  margin: 0 10px 0 10px;
+  padding: 10px;
+}
+
+.computer-option {
+  width: 50%;
+}
+
+.computer-option>button {
+  height: 100%;
+  vertical-align: bottom;
+  padding: 10px;
+}
+
+.game {
+  text-align: center;
+}
