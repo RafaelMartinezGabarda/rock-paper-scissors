@@ -1,0 +1,15 @@
+<div class="header">
+  @if ((user | async); as userValue) {
+    @if(userValue.anonymous){
+      <button
+        (click)="authService.signIn()">
+        Sign in to play
+      </button>
+    } @else {
+      <button
+        (click)="authService.signOut()">
+        Sign out
+      </button>
+    }
+  }
+</div>

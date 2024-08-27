@@ -1,0 +1,21 @@
+.header {
+  height: 50px;
+  background-color: #00235f;
+  margin-bottom: 30px;
+}
+
+.header>button {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0 15px 0 15px;
+}
+
+.header>button:hover {
+  height: 100%;
+  background-color: #003899;
+  color: white;
+  border: none;
+}

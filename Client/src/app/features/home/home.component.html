@@ -1,0 +1,13 @@
+@if ((user | async); as userValue) {
+  @if(userValue.anonymous){
+    <div class="not-logged">
+      <button
+      class="btn"
+        (click)="authService.signIn()">
+        Sign in to play
+      </button>
+    </div>
+  } @else {
+    <app-game></app-game>
+  }
+}

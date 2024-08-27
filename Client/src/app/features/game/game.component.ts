@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from './game.service';
-import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, SpinnerComponent],
+  imports: [SpinnerComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
