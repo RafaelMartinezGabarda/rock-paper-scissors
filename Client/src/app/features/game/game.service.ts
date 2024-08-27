@@ -23,7 +23,7 @@ export class GameService {
   playRound(option: string): Observable<any> {
     return this.httpClient.put(`${this.baseUrl}/play/${option}`, null).pipe(
       catchError((error) => {
-        // Handle the error, I keep it empty for the showcase
+        alert('Could not make move');
         throw error;
       })
     );

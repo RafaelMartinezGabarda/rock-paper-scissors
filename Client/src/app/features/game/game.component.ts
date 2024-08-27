@@ -26,9 +26,16 @@ export class GameComponent implements OnInit {
   playRound(option: string) {
     this.isLoading = true;
 
-    this.gameService.playRound(option).subscribe((result) => {
-      this.game = result;
-      this.isLoading = false;
+    this.gameService.playRound(option).subscribe({
+      next: (result) => {
+        this.game = result;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
     });
   }
 
