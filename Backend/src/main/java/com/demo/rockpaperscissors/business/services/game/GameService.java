@@ -1,5 +1,6 @@
 package com.demo.rockpaperscissors.business.services.game;
 
+import com.demo.rockpaperscissors.business.exceptions.GameNotFoundException;
 import com.demo.rockpaperscissors.business.model.GameResult;
 import com.demo.rockpaperscissors.business.model.enums.Option;
 import com.demo.rockpaperscissors.business.model.enums.Result;
@@ -25,6 +26,10 @@ public class GameService implements IGameService {
 
     @Override
     public GameResult playRound(Option playerOption, Option computerOption) {
+        if (gameResult == null) {
+            throw new GameNotFoundException("No game found");
+        }
+
         gameResult.setPlayerOption(playerOption);
         gameResult.setComputerOption(computerOption);
 
