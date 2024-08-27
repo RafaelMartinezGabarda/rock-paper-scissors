@@ -1,17 +1,27 @@
 <div class="game">
-  <h1>{{game?.playerScore}} - {{game?.computerScore}}</h1>
-  
-  <div class="options">
-    <div class="player-options">
-      <ng-container *ngFor="let option of options">
-        <button (click)="playRound(option)">
-          <img [src]="'images/' + option + '.png'">
-        </button>
-      </ng-container>
-    </div>
-  
-    <div class="computer-option">
-      <img [src]="'images/' + game?.computerOption + '.png'">
+  <div *ngIf="game">
+    <h1>{{game.playerScore}} - {{game.computerScore}}</h1>
+    
+    <div class="options">
+      <div class="player-options">
+        <ng-container *ngFor="let option of options">
+          <button (click)="playRound(option)"
+          [disabled]="isLoading">
+            <img [src]="'images/' + option + '.png'">
+          </button>
+        </ng-container>
+      </div>
+    
+      <div class="computer-option">
+        <app-spinner [isLoading]="isLoading || !game.computerOption"></app-spinner>
+        <img *ngIf="!isLoading && game.computerOption" [src]="'images/' + game.computerOption + '.png'">
+      </div>
     </div>
   </div>
+
+  <button
+    (click)="newGame()"
+    routerLinkActive="router-link-active" >
+    New Game
+  </button>
 </div>

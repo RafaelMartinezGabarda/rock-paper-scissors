@@ -19,7 +19,7 @@ public class GameController {
     }
 
     @PutMapping("/play/{option}")
-    public GameResult getWinner(@PathVariable Option option) {
+    public GameResult playRound(@PathVariable Option option) {
         Option computerOption = gameService.generateRandomOption();
 
         return gameService.playRound(option, computerOption);
