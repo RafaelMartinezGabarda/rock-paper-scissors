@@ -16,7 +16,7 @@ export class GameComponent implements OnInit {
 
   constructor(private gameService: GameService) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.gameService.getOptions().subscribe((result) => {
       this.options = result;
     });
