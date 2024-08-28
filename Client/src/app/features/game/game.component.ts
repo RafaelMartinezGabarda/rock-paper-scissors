@@ -12,6 +12,7 @@ import { SpinnerComponent } from '../../shared/components/spinner/spinner.compon
 export class GameComponent implements OnInit {
   game: any | undefined;
   options: any | undefined;
+  clickedOption: any | undefined;
   isLoading = false;
 
   constructor(private gameService: GameService) {}
@@ -24,6 +25,7 @@ export class GameComponent implements OnInit {
 
   playRound(option: string) {
     this.isLoading = true;
+    this.clickedOption = option;
 
     this.gameService.playRound(option).subscribe({
       next: (result) => {

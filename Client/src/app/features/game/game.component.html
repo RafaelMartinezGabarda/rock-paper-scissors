@@ -5,8 +5,10 @@
     <div class="options">
       <div class="player-options">
         @for (option of options; track $index) {
-          <button (click)="playRound(option)"
-          [disabled]="isLoading">
+          <button 
+            [class]="clickedOption === option ? game.result + '-player' : ''"
+            (click)="playRound(option)"
+            [disabled]="isLoading">
             <img [src]="'images/' + option + '.png'">
           </button>
         }
@@ -15,7 +17,7 @@
       <div class="computer-option">
         <app-spinner [isLoading]="isLoading || !game.computerOption"></app-spinner>
         @if (!isLoading && game.computerOption) {
-          <img [src]="'images/' + game.computerOption + '.png'">
+          <img [class]="game.result + '-computer'" [src]="'images/' + game.computerOption + '.png'">
         }
       </div>
     </div>
