@@ -4,19 +4,26 @@ import com.demo.rockpaperscissors.business.exceptions.GameNotFoundException;
 import com.demo.rockpaperscissors.business.model.GameResult;
 import com.demo.rockpaperscissors.business.model.enums.Option;
 import com.demo.rockpaperscissors.business.model.enums.Result;
+import com.demo.rockpaperscissors.business.repositories.GameResultRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
 @Service
 public class GameService implements IGameService {
-    private GameResult gameResult;
+    private final GameResultRepository gameRepository;
+
+    @Autowired
+    public GameService(GameResultRepository gameRepository) {
+        this.gameRepository = gameRepository;
+    }
 
     @Override
     public GameResult createGame() {
-        gameResult = new GameResult();
+        GameResult gameResult = new GameResult();
 
-        return gameResult;
+        return gameRepository.save(gameResult);
     }
 
     @Override
@@ -25,23 +32,22 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public GameResult playRound(Option playerOption, Option computerOption) {
-        if (gameResult == null) {
-            throw new GameNotFoundException("No game found");
-        }
+    public GameResult playRound(long id, Option playerOption, Option computerOption) {
+        GameResult gameResult = gameRepository.findById(id)
+                .orElseThrow(() -> new GameNotFoundException("No game found"));
 
         gameResult.setPlayerOption(playerOption);
         gameResult.setComputerOption(computerOption);
 
-        Result roundResult = this.evaluateResult();
+        Result roundResult = this.evaluateResult(gameResult);
 
         gameResult.setResult(roundResult);
-        this.setScore(roundResult);
+        this.setScore(gameResult, roundResult);
 
-        return gameResult;
+        return gameRepository.save(gameResult);
     }
 
-    private Result evaluateResult(){
+    private Result evaluateResult(GameResult gameResult){
         if(gameResult.getPlayerOption().equals(gameResult.getComputerOption())){
             return Result.DRAW;
         }
@@ -49,7 +55,7 @@ public class GameService implements IGameService {
         return gameResult.getPlayerOption().beats(gameResult.getComputerOption()) ? Result.WIN : Result.LOSE;
     }
 
-    private void setScore(Result result) {
+    private void setScore(GameResult gameResult, Result result) {
         if(result.equals(Result.DRAW)){
             gameResult.setPlayerScore(gameResult.getPlayerScore() + 1);
             gameResult.setComputerScore(gameResult.getComputerScore() + 1);

@@ -6,5 +6,5 @@ import com.demo.rockpaperscissors.business.model.enums.Option;
 public interface IGameService {
     GameResult createGame();
     Option generateRandomOption();
-    GameResult playRound(Option playerOption, Option computerOption);
+    GameResult playRound(long id, Option playerOption, Option computerOption);
 }

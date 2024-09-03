@@ -23,6 +23,7 @@ public class AuthConfiguration {
         http.cors(Customizer.withDefaults());
 
         http.csrf(csrf -> csrf.disable());
+        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         // Return 401 (unauthorized) instead of 302 (redirect to login) when
         // authorization is missing or invalid
@@ -32,7 +33,7 @@ public class AuthConfiguration {
         }));
 
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/actuator/**").permitAll()
+                .requestMatchers("/actuator/**", "/h2-console/**").permitAll()
                 .anyRequest().authenticated());
 
         return http.build();

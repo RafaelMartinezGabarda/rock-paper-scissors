@@ -1,5 +1,6 @@
 package com.demo.rockpaperscissors.controllers;
 
+import com.demo.rockpaperscissors.business.exceptions.GameNotFoundException;
 import com.demo.rockpaperscissors.business.exceptions.OptionNotFoundException;
 import com.demo.rockpaperscissors.business.model.GameResult;
 import com.demo.rockpaperscissors.business.model.enums.Option;
@@ -22,15 +23,15 @@ public class GameController {
         return ResponseEntity.ok(gameService.createGame());
     }
 
-    @PutMapping("/play/{option}")
-    public ResponseEntity<GameResult> playRound(@PathVariable String option) {
+    @PutMapping("/play/{id}")
+    public ResponseEntity<GameResult> playRound(@PathVariable long id, @RequestBody String option) throws OptionNotFoundException, GameNotFoundException {
         if(Arrays.stream(Option.values()).noneMatch((o) -> o.name().equals(option))) {
             throw new OptionNotFoundException("Option not found");
         }
 
         Option computerOption = gameService.generateRandomOption();
 
-        return ResponseEntity.ok(gameService.playRound(Option.valueOf(option), computerOption));
+        return ResponseEntity.ok(gameService.playRound(id, Option.valueOf(option), computerOption));
     }
 
     @GetMapping("/options")

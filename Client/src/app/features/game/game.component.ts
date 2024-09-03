@@ -27,7 +27,7 @@ export class GameComponent implements OnInit {
     this.isLoading = true;
     this.clickedOption = option;
 
-    this.gameService.playRound(option).subscribe({
+    this.gameService.playRound(this.game.id, option).subscribe({
       next: (result) => {
         this.game = result;
       },

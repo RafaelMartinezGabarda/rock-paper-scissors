@@ -20,8 +20,8 @@ export class GameService {
     );
   }
 
-  playRound(option: string): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/play/${option}`, null).pipe(
+  playRound(id: number, option: string): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/play/${id}`, option).pipe(
       catchError((error) => {
         alert('Could not make move');
         throw error;
