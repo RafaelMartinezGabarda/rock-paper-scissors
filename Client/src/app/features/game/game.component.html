@@ -1,27 +1,9 @@
 <div class="game">
-  @if (game && options) {
-    <h1>{{game.playerScore}} - {{game.computerScore}}</h1>
-    
-    <div class="options">
-      <div class="player-options">
-        @for (option of options; track $index) {
-          <button 
-            [class]="clickedOption === option ? game.result + '-player' : ''"
-            (click)="playRound(option)"
-            [disabled]="isLoading">
-            <img [src]="'images/' + option + '.png'">
-          </button>
-        }
-      </div>
-    
-      <div class="computer-option">
-        <app-spinner [isLoading]="isLoading || !game.computerOption"></app-spinner>
-        @if (!isLoading && game.computerOption) {
-          <img [class]="game.result + '-computer'" [src]="'images/' + game.computerOption + '.png'">
-        }
-      </div>
-    </div>
-  }
+  <app-playground 
+  [game]="game" 
+  [options]="options" 
+  [isLoading]="isLoading"
+  (optionSelected)="playRound($event)"></app-playground>
 
   <button
     class="btn"
