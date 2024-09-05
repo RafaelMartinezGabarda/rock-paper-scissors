@@ -69,10 +69,18 @@ export class AuthService {
   }
 
   async signIn() {
-    await this.keycloakService.login();
+    try {
+      await this.keycloakService.login();
+    } catch (err) {
+      alert('Error trying to contact keycloak');
+    }
   }
 
   async signOut() {
-    await this.keycloakService.logout();
+    try {
+      await this.keycloakService.logout();
+    } catch (err) {
+      alert('Error trying to contact keycloak');
+    }
   }
 }

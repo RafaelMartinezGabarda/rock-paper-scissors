@@ -2,8 +2,19 @@ package com.demo.rockpaperscissors.business.model;
 
 import com.demo.rockpaperscissors.business.model.enums.Option;
 import com.demo.rockpaperscissors.business.model.enums.Result;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
 
+@Data
+@Entity
 public class GameResult {
+
+    @Id
+    @GeneratedValue
+    private long Id;
+
     private Option playerOption;
 
     private int playerScore;
@@ -14,43 +25,8 @@ public class GameResult {
 
     private Result result;
 
-    public Option getPlayerOption() {
-        return playerOption;
-    }
-
-    public void setPlayerOption(Option playerOption) {
-        this.playerOption = playerOption;
-    }
-
-    public int getPlayerScore() {
-        return playerScore;
-    }
-
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
-    }
-
-    public Option getComputerOption() {
-        return computerOption;
-    }
-
-    public void setComputerOption(Option computerOption) {
-        this.computerOption = computerOption;
-    }
-
-    public int getComputerScore() {
-        return computerScore;
-    }
-
-    public void setComputerScore(int computerScore) {
-        this.computerScore = computerScore;
-    }
-
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
+    public GameResult() {
+        this.playerScore = 0;
+        this.computerScore = 0;
     }
 }
